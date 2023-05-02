@@ -158,3 +158,28 @@ Burning – there is a 15% chance that upon receiving a hit, the enemy is set on
 Paralyzing – there is a 10% chance that upon receiving a hit, the enemy is paralyzed, which makes him unable to attack or defend himself during the next three turns (effectively, this skips three attacks and deals three hits). If paralyzed again, the duration of the paralyzed state is reset to three turns
 
 Using the weapon effect system you have implemented, create an effect of your own. Will it be freezing, magic, or something else? Be creative!
+
+
+Hints
+1- As you may have noticed, there are a lot of numbers in this project. Don't just put them into your code without explanation. Remember, using "magic numbers" is bad practice!
+
+Manage all randomization through the pre-created static Random object in Utils. In this case, if a "random seed" is provided to the Random constructor, the tournament is exactly reproducible. Check it out!
+The Colosseum class is provided with a View and a GladiatorFactory instance. It does not have to worry about either the details or the instantiation of these objects. This pattern is called dependency injection, the best way to decouple parts of our code. You'll hear a lot about this later on.
+The hardest part of this project is to build up the Tournament tree and the "execution" of combats. The Tournament itself is a recursive structure, and both processes require a recursive approach. The following example use cases may make this easier to understand.
+When a Tournament is created with just one pair of contestants, leave leftBranch and rightBranch uninitialized.
+When the second pair is added, divide the Tournament in two branches. The old value (first pair) becomes the value of the leftBranch, and the new pair becomes the value of rightBranch. At this point, we have three instances of the Tournament, the first one, and its two branches. Finally, assign null as the value of the first Tournament. Later on, this is swapped for the winners of subbranches.
+When more contestants are added, our job is to add them on each side evenly, to keep the Tournament balanced. We do it simply by calling the add() method on the leftBranch and the rightBranch alternately.
+
+
+Background materials
+Model-view-controller
+
+How to design classes
+
+Enums
+
+Polymorphism
+
+Polymorphism
+
+Random seed
