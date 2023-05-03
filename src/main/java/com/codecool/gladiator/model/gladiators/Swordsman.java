@@ -17,16 +17,16 @@ public class Swordsman extends Gladiator {
 
     @Override
     protected Multiplier getHpMultiplier() {
-        return null;
+        return Multiplier.Medium;
     }
 
     @Override
     protected Multiplier getSpMultiplier() {
-        return null;
+        return Multiplier.Medium;
     }
 
     @Override
     protected Multiplier getDexMultiplier() {
-        return null;
+        return Multiplier.Medium;
     }
 }

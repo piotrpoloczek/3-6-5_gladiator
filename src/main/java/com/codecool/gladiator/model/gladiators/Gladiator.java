@@ -7,6 +7,7 @@ public abstract class Gladiator {
     private final int baseSp;
     private final int baseDex;
     private int level;
+    private int currentHp;
 
     /**
      * Constructor for Gladiators
@@ -20,6 +21,7 @@ public abstract class Gladiator {
     public Gladiator(String name, int baseHp, int baseSp, int baseDex, int level) {
         this.name = name;
         this.baseHp = baseHp;
+        this.currentHp = baseHp;
         this.baseSp = baseSp;
         this.baseDex = baseDex;
         this.level = level;
@@ -59,15 +61,23 @@ public abstract class Gladiator {
     }
 
     public void levelUp() {
-
+        this.level += 1;
     }
 
     public int getLevel() {
         return this.level;
     }
 
-    public int getMaxHp(int hpMultiplier) {
+    public int getMaxHp() {
         return (int) (this.baseHp * this.getHpMultiplier().getValue() * getLevel());
+    }
+
+    public int getMaxSp() {
+        return (int) (this.baseSp * this.getSpMultiplier().getValue() * getLevel());
+    }
+
+    public int getMaxDex() {
+        return (int) (this.baseDex * this.getDexMultiplier().getValue() * getLevel());
     }
 
     public enum Multiplier {
