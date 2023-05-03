@@ -13,6 +13,10 @@ public class GladiatorFactory {
     private static final int MAX_STAT = 100;
     private static final int MIN_LEVEL = 1;
     private static final int MAX_LEVEL = 5;
+    private static final double CHANCE_GET_SWORDSMAN = 0.4;
+    private static final double CHANCE_GET_ARCHER = 0.6;
+    private static final double CHANCE_GET_ASSASSIN = 0.8;
+    private static final double CHANCE_GET_BRUTAL = 1;
 
     private List<String> names;
 
@@ -54,11 +58,11 @@ public class GladiatorFactory {
         int dex = RandomUtils.getRandomInt(MIN_STAT, MAX_STAT);
         int level = RandomUtils.getRandomInt(MIN_LEVEL, MAX_LEVEL);
 
-        if (randomGladiator < 0.4) {
+        if (randomGladiator < CHANCE_GET_SWORDSMAN) {
             return new Swordsman(name, hp, sp, dex, level);
-        } else if (randomGladiator < 0.6) {
+        } else if (randomGladiator < CHANCE_GET_ARCHER) {
             return new Archer(name, hp, sp, dex, level);
-        } else if (randomGladiator < 0.8 ) {
+        } else if (randomGladiator < CHANCE_GET_ASSASSIN) {
             return new Assassin(name, hp, sp, dex, level);
         } else {
             return new Brutal(name, hp, sp, dex, level);

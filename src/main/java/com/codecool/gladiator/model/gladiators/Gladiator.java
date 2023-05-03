@@ -80,6 +80,37 @@ public abstract class Gladiator {
         return (int) (this.baseDex * this.getDexMultiplier().getValue() * getLevel());
     }
 
+    public void decreaseHpBy(int damage) {
+        this.currentHp -= damage;
+    }
+
+    public boolean isDead() {
+        if (currentHp <= 0 ) {
+            return true;
+        }
+        return false;
+    }
+
+    public void healUp() {
+        this.currentHp = this.baseHp;
+    }
+
+    public int getHp() {
+        return this.baseHp;
+    }
+
+    public int getSp() {
+        return this.baseSp;
+    }
+
+    public int getDex() {
+        return this.baseDex;
+    }
+
+    public int getCurrentHp() {
+        return this.currentHp;
+    }
+
     public enum Multiplier {
         Low(0.75),
         Medium(1.0),
