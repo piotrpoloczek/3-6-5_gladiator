@@ -13,8 +13,12 @@ public class Combat {
 
     private final Gladiator gladiator1;
     private final Gladiator gladiator2;
-
     private final List<String> combatLog;
+
+    private static final double MIN_DAMAGE_RATIO = 0.1;
+    private static final double MAX_DAMAGE_RATIO = 0.5;
+    private static final int MIN_DEX_DIFF = 10;
+    private static final int MAX_DEF_DIFF = 100;
 
     public Combat(Contestants contestants) {
         this.gladiator1 = contestants.gladiator1;
@@ -44,11 +48,11 @@ public class Combat {
         Gladiator defender = attacker == gladiator1 ? gladiator2 : gladiator1;
 
         while (!attacker.isDead() && !defender.isDead()) {
-            double dexterityDifference = Math.max(attacker.getDex() - defender.getDex(), 10);
-            double hitChance = Math.min(dexterityDifference, 100) / 100.0;
+            double dexterityDifference = Math.max(attacker.getDex() - defender.getDex(), MIN_DEX_DIFF);
+            double hitChance = Math.min(dexterityDifference, MAX_DEF_DIFF) / 100.0;
 
             if (RandomUtils.getRandomDouble() < hitChance) {
-                int damage = (int) (attacker.getSp() * RandomUtils.getRandomDouble(0.1, 0.5));
+                int damage = (int) (attacker.getSp() * RandomUtils.getRandomDouble(MIN_DAMAGE_RATIO, MAX_DAMAGE_RATIO));
                 defender.decreaseHpBy(damage);
                 combatLog.add(String.format("%s deals %damage", attacker.getFullName(), damage));
             } else {
