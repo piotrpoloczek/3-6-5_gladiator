@@ -28,4 +28,17 @@ public class RandomUtils {
     public static double getRandomDouble() {
         return RANDOM.nextDouble();
     }
+
+    public static double getRandomDouble(double min, double max) {
+        return min + (max - min) * RANDOM.nextDouble();
+    }
+
+    /**
+     * Returns a random boolean value.
+     *
+     * @return random boolean
+     */
+    public static boolean getRandomBoolean() {
+        return RANDOM.nextBoolean();
+    }
 }
