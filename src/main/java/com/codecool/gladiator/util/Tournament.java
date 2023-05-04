@@ -1,6 +1,8 @@
 package com.codecool.gladiator.util;
 
 import com.codecool.gladiator.model.Contestants;
+import com.sun.tools.jconsole.JConsoleContext;
+import com.sun.tools.jconsole.JConsolePlugin;
 
 import java.util.List;
 
@@ -24,7 +26,8 @@ public class Tournament {
      * @param contestants the initial value to be added to the tree
      */
     public Tournament(Contestants contestants) {
-        add(contestants);
+        this.contestants = contestants;
+        this.size = 1;
     }
 
     /**
@@ -33,7 +36,27 @@ public class Tournament {
      * @param values the list of values to be added to the tree
      */
     public Tournament(List<Contestants> values) {
-        addAll(values);
+        this.size = values.size();
+        buildTournament(values);
+    }
+
+    /**
+     * Builds the tournament tree recursively
+     *
+     * @param values the list of values to be added to the tree
+     */
+    private void buildTournament(List<Contestants> values) {
+        if (values.size() == 1) {
+            this.contestants = values.get(0);
+            return;
+        }
+
+        int middle = values.size() / 2;
+        List<Contestants> leftValue = values.subList(0, middle);
+        List<Contestants> rightValue = values.subList(middle, values.size());
+
+        leftBranch = new Tournament(leftValue);
+        rightBranch = new Tournament(rightValue);
     }
 
     /**
@@ -87,7 +110,19 @@ public class Tournament {
      * @param value the value to be added to the tree
      */
     public void add(Contestants value) {
-        // Todo
+        if (leftBranch == null) {
+            leftBranch = new Tournament(contestants);
+            rightBranch = new Tournament(value);
+            contestants = null;
+        } else {
+            if (left) {
+                leftBranch.add(value);
+            } else {
+                rightBranch.add(value);
+            }
+            left = !left;
+        }
+        size++;
     }
 
     /**
