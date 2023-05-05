@@ -12,4 +12,9 @@ public class Contestants {
         this.gladiator2 = gladiator2;
     }
 
+    public void printContenstant() {
+        System.out.println(this.gladiator1);
+        System.out.println(this.gladiator2);
+    }
+
 }

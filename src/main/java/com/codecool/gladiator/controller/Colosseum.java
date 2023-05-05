@@ -19,6 +19,7 @@ public class Colosseum {
     private final GladiatorFactory gladiatorFactory;
     private int stages = 2;
 
+
     public Colosseum(Viewable view, GladiatorFactory gladiatorFactory) {
         this.view = view;
         this.gladiatorFactory = gladiatorFactory;
@@ -32,8 +33,11 @@ public class Colosseum {
         var gladiators = generateGladiators(numberOfGladiators);
         var contestants = splitGladiatorsIntoPairs(gladiators);
         var tournamentTree = new Tournament(contestants);
-        var champion = getChampion(tournamentTree);
-        announceChampion(champion);
+        Tournament.printTournament(tournamentTree);
+
+        System.out.println(tournamentTree);
+//        var champion = getChampion(tournamentTree);
+//        announceChampion(champion);
 
         // The following line chains the above lines:
         // announceChampion(getChampion(new BinaryTree<>(generateGladiators((int) Math.pow(2, stages)))));
@@ -41,20 +45,31 @@ public class Colosseum {
 
     private List<Gladiator> generateGladiators(int numberOfGladiators) {
         List<Gladiator> gladiators = new ArrayList<>();
-        // Todo
+
+        for (int i = 0; i < numberOfGladiators; i++) {
+            // Generate a new gladiator instance using the provided factory
+            // and add it to the list of gladiators
+            gladiators.add(gladiatorFactory.generateRandomGladiator());
+        }
+
         introduceGladiators(gladiators);
         return gladiators;
     }
 
     private List<Contestants> splitGladiatorsIntoPairs(List<Gladiator> gladiators) {
-        // Todo
-        return new LinkedList<>();
+        List<Contestants> contestants = new LinkedList<>();
+        for (int i = 0; i < gladiators.size() - 1; i += 2) {
+            contestants.add(new Contestants(gladiators.get(i), gladiators.get(i + 1)));
+        }
+        return contestants;
     }
 
-    private Gladiator getChampion(Tournament tournament) {
-        // Todo - call simulateCombat as many times as needed
-        return null;
-    }
+//    private Gladiator getChampion(Tournament tournament) {
+//        while (tournament.hasNextRound()) {
+//            List<Contestants> round = tournament.nextRound();
+//            List<Gladiator> winners
+//        }
+//    }
 
     private Gladiator simulateCombat(Combat combat) {
         Gladiator gladiator1 = combat.getGladiator1();

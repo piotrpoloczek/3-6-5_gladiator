@@ -135,4 +135,15 @@ public class Tournament {
             add(value);
         }
     }
+
+    public static void printTournament(Tournament tournament) {
+        if (tournament.contestants == null){
+            return;
+        }
+
+        printTournament(tournament.leftBranch);
+        printTournament(tournament.rightBranch);
+        tournament.contestants.printContenstant();
+    }
+
 }
