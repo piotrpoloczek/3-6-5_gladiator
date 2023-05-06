@@ -66,9 +66,11 @@ public class Combat {
 
         if (gladiator1.isDead()) {
             combatLog.add(String.format("%s has died, %s wins!", gladiator1.getFullName(), gladiator2.getFullName()));
+            System.out.println(combatLog);
             return gladiator2;
         } else {
             combatLog.add(String.format("%s has died, %s wins!", gladiator2.getFullName(), gladiator1.getFullName()));
+            System.out.println(combatLog);
             return gladiator1;
         }
     }

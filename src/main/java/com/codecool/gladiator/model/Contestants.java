@@ -13,8 +13,8 @@ public class Contestants {
     }
 
     public void printContenstant() {
-        System.out.println(this.gladiator1);
-        System.out.println(this.gladiator2);
+        System.out.println(this.gladiator1.getFullName());
+        System.out.println(this.gladiator2.getFullName());
     }
 
 }

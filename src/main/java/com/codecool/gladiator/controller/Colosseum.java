@@ -33,11 +33,8 @@ public class Colosseum {
         var gladiators = generateGladiators(numberOfGladiators);
         var contestants = splitGladiatorsIntoPairs(gladiators);
         var tournamentTree = new Tournament(contestants);
-        Tournament.printTournament(tournamentTree);
-
-        System.out.println(tournamentTree);
-//        var champion = getChampion(tournamentTree);
-//        announceChampion(champion);
+        var champion = getChampion(tournamentTree);
+        announceChampion(champion);
 
         // The following line chains the above lines:
         // announceChampion(getChampion(new BinaryTree<>(generateGladiators((int) Math.pow(2, stages)))));
@@ -64,12 +61,19 @@ public class Colosseum {
         return contestants;
     }
 
-//    private Gladiator getChampion(Tournament tournament) {
-//        while (tournament.hasNextRound()) {
-//            List<Contestants> round = tournament.nextRound();
-//            List<Gladiator> winners
-//        }
-//    }
+    private Gladiator getChampion(Tournament tournament) {
+        if (tournament.getContestants() != null) {
+            tournament.getContestants().printContenstant();
+            Combat combat = new Combat(tournament.getContestants());
+            return combat.simulate();
+        }
+
+        Gladiator leftWinner = getChampion(tournament.getLeftBranch());
+        Gladiator rightWinner = getChampion(tournament.getRightBranch());
+
+        Combat combat = new Combat(new Contestants(leftWinner, rightWinner));
+        return combat.simulate();
+    }
 
     private Gladiator simulateCombat(Combat combat) {
         Gladiator gladiator1 = combat.getGladiator1();

@@ -1,6 +1,8 @@
 package com.codecool.gladiator.util;
 
+import com.codecool.gladiator.model.Combat;
 import com.codecool.gladiator.model.Contestants;
+import com.codecool.gladiator.model.gladiators.Gladiator;
 import com.sun.tools.jconsole.JConsoleContext;
 import com.sun.tools.jconsole.JConsolePlugin;
 
@@ -134,16 +136,6 @@ public class Tournament {
         for (Contestants value : values) {
             add(value);
         }
-    }
-
-    public static void printTournament(Tournament tournament) {
-        if (tournament.contestants == null){
-            return;
-        }
-
-        printTournament(tournament.leftBranch);
-        printTournament(tournament.rightBranch);
-        tournament.contestants.printContenstant();
     }
 
 }
