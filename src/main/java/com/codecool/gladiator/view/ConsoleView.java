@@ -22,7 +22,7 @@ public class ConsoleView implements Viewable {
     public int getNumberBetween(int min, int max) {
         while (true) {
             System.out.printf(
-                    "Please provide the number between %s and %s",
+                    "Please provide the number between %s and %s: ",
                     min, max);
 
             int choice = scanner.nextInt();

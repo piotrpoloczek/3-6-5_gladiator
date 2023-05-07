@@ -63,16 +63,15 @@ public class Colosseum {
 
     private Gladiator getChampion(Tournament tournament) {
         if (tournament.getContestants() != null) {
-            tournament.getContestants().printContenstant();
             Combat combat = new Combat(tournament.getContestants());
-            return combat.simulate();
+            return simulateCombat(combat);
         }
 
         Gladiator leftWinner = getChampion(tournament.getLeftBranch());
         Gladiator rightWinner = getChampion(tournament.getRightBranch());
 
         Combat combat = new Combat(new Contestants(leftWinner, rightWinner));
-        return combat.simulate();
+        return simulateCombat(combat);
     }
 
     private Gladiator simulateCombat(Combat combat) {
@@ -80,11 +79,11 @@ public class Colosseum {
         Gladiator gladiator2 = combat.getGladiator2();
         announceCombat(gladiator1, gladiator2);
 
-        // Todo
+        Gladiator winner = combat.simulate();
 
         displayCombatLog(combat);
-        announceWinnerAndLoser(gladiator1, gladiator2);
-        return gladiator1;
+        announceWinnerAndLoser(winner, gladiator2);
+        return winner;
     }
 
     public void welcome() {
@@ -93,22 +92,22 @@ public class Colosseum {
 
     public void welcomeAndAskForStages() {
         welcome();
-        view.display("How many stages of the Tournament do you wish to watch? (1-10)");
+        view.display("How many stages of the Tournament do you wish to watch? (1-10): ");
         stages = view.getNumberBetween(MIN_TOURNAMENT_STAGES, MAX_TOURNAMENT_STAGES);
     }
 
     private void introduceGladiators(List<Gladiator> gladiators) {
         view.display(String.format("\nWe have selected Rome's %d finest warriors for today's Tournament!", gladiators.size()));
         for (Gladiator gladiator: gladiators) {
-            view.display(String.format(" - %s", gladiator));
+            view.display(String.format(" - %s", gladiator.getFullName()));
         }
         view.display("\n\"Ave Imperator, morituri te salutant!\"");
     }
 
     private void announceCombat(Gladiator gladiator1, Gladiator gladiator2) {
         view.display(String.format("\nDuel %s versus %s:", gladiator1.getName(), gladiator2.getName()));
-        view.display(String.format(" - %s", gladiator1));
-        view.display(String.format(" - %s", gladiator2));
+        view.display(String.format(" - %s", gladiator1.getFullName()));
+        view.display(String.format(" - %s", gladiator2.getFullName()));
     }
 
     private void displayCombatLog(Combat combat) {
