@@ -106,12 +106,25 @@ public class Colosseum {
 
     private void announceCombat(Gladiator gladiator1, Gladiator gladiator2) {
         view.display(String.format("\nDuel %s versus %s:", gladiator1.getName(), gladiator2.getName()));
-        view.display(String.format(" - %s", gladiator1.getFullName()));
-        view.display(String.format(" - %s", gladiator2.getFullName()));
+        announceGladiator(gladiator1);
+        announceGladiator(gladiator2);
+    }
+
+    private void announceGladiator(Gladiator gladiator) {
+        view.display(String.format(
+                " - %s (%s/%s HP, %s SP, %s DEX, %s LVL)",
+                gladiator.getFullName(),
+                gladiator.getHp(),
+                gladiator.getMaxHp(),
+                gladiator.getSp(),
+                gladiator.getDex(),
+                gladiator.getLevel()
+        ));
     }
 
     private void displayCombatLog(Combat combat) {
-        view.display(String.format(" - %s", combat.getCombatLog(", ")));
+        view.display("\nBegin!");
+        view.display(String.format(" - %s", combat.getCombatLog("\n - ")));
     }
 
     private void announceWinnerAndLoser(Gladiator winner, Gladiator loser) {
