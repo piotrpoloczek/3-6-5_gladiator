@@ -29,4 +29,14 @@ public class Swordsman extends Gladiator {
     protected Multiplier getDexMultiplier() {
         return Multiplier.Medium;
     }
+
+    @Override
+    public String customMsgTarget(int damage) {
+        return this.getFullName() + " attack furiously " + damage;
+    }
+
+    @Override
+    public String customMsgMiss() {
+        return this.getFullName() + " miss badly";
+    }
 }

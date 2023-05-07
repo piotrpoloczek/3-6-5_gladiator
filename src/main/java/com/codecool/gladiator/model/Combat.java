@@ -54,9 +54,11 @@ public class Combat {
             if (RandomUtils.getRandomDouble() < hitChance) {
                 int damage = (int) (attacker.getSp() * RandomUtils.getRandomDouble(MIN_DAMAGE_RATIO, MAX_DAMAGE_RATIO));
                 defender.decreaseHpBy(damage);
-                combatLog.add(String.format("%s deals %damage", attacker.getFullName(), damage));
+                combatLog.add(attacker.customMsgTarget(damage));
+//                combatLog.add(String.format("%s deals %s damage", attacker.getFullName(), damage));
             } else {
-                combatLog.add(String.format("%s missed", attacker.getFullName()));
+//                combatLog.add(String.format("%s missed", attacker.getFullName()));
+                combatLog.add(attacker.customMsgMiss());
             }
 
             Gladiator temp = attacker;

@@ -42,6 +42,10 @@ public abstract class Gladiator {
      */
     protected abstract Multiplier getDexMultiplier();
 
+    public abstract String customMsgTarget(int damage);
+
+    public abstract String customMsgMiss();
+
     /**
      * @return Gladiator's name
      */
